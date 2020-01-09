@@ -23,3 +23,47 @@ export const createStream = (formValues) => {
     })
   }
 }
+
+export const fetchStreams = () => {
+  return async (dispatch) => {
+    const resp = await streams.get("/streams")
+
+    dispatch({
+      type: FETCH_STREAMS,
+      payload: resp.data
+    })
+  }
+}
+
+export const fetchStream = (id) => {
+  return async (dispatch) => {
+    const resp = await streams.get(`/streams/${id}`)
+
+    dispatch({
+      type: FETCH_STREAM,
+      payload: resp.data
+    })
+  }
+}
+
+export const editStreams = (id, updates) => {
+  return async (dispatch) => {
+    const resp = await streams.put(`/streams/${id}`, updates)
+
+    dispatch({
+      type: EDIT_STREAM,
+      payload: resp
+    })
+   }
+}
+
+export const deleteStreams = (id) => {
+  return async (dispatch) => {
+    await streams.delete(`/streams/${id}`)
+
+    dispatch({
+      type: DELETE_STREAM,
+      payload: id
+    })
+  }
+}
