@@ -8,8 +8,8 @@ class StreamCreate extends Component{
     if(error && touched){
       return (
         <div className="ui error message">
-          <div>
-
+          <div className="header">
+            {error}
           </div>
         </div>
       )
@@ -17,8 +17,10 @@ class StreamCreate extends Component{
   }
 
   renderInput = ({ input, label, meta }) => {
+    const classError = `field ${meta.error && meta.touched ? "error" : ""}`
+    
     return(
-      <div>
+      <div className={classError}>
         <label>{label}</label>
         <input 
           {...input }
@@ -37,9 +39,10 @@ class StreamCreate extends Component{
   render(){
     return (
       <div>
-        <form className="ui form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <Field name="title" component={this.renderInput} label="Enter Title"/>
-          <Field name="description" component={this.renderInput} label="Enter Description" />
+        <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <Field name="title" component={this.renderInput} label="Enter Title"/>
+            <Field name="description" component={this.renderInput} label="Enter Description" />
+  
           <button className="ui button primary">Submit</button>
         </form>
       </div>
