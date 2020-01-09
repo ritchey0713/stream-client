@@ -4,13 +4,27 @@ import { Field, reduxForm } from 'redux-form'
 
 class StreamCreate extends Component{
   
-  renderInput = ({ input, label }) => {
+  renderError = ({ error, touched }) => {
+    if(error && touched){
+      return (
+        <div className="ui error message">
+          <div>
+
+          </div>
+        </div>
+      )
+    }
+  }
+
+  renderInput = ({ input, label, meta }) => {
     return(
       <div>
         <label>{label}</label>
         <input 
           {...input }
+          autoComplete="off"
         />
+        {this.renderError(meta)}
       </div>
       
     )
