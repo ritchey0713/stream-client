@@ -1,5 +1,6 @@
 import { SIGN_IN, SIGN_OUT, CREATE_STREAM, FETCH_STREAM, FETCH_STREAMS, EDIT_STREAM, DELETE_STREAM } from "./types"
 import streams from "../apis/streams"
+import history from "../history"
 
 export const signIn = (userId) => {
   return {
@@ -22,6 +23,12 @@ export const createStream = (formValues) => {
       type: CREATE_STREAM,
       payload: resp.data
     })
+    
+    if(resp.status === 201){
+      history.push("/")
+    } else {
+      console.log("Need to go back to form")
+    }
   }
 }
 
