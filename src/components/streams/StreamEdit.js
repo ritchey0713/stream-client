@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { fetchStream } from "../../actions/index"
+import { fetchStream, editStreams } from "../../actions/index"
+import StreamForm from  "./StreamForm"
 
 class StreamEdit extends Component {
 
@@ -8,8 +9,11 @@ class StreamEdit extends Component {
     this.props.fetchStream(this.props.match.params.id)
   }
 
+  onSubmit = (formValues) => {
+     console.log(formValues)
+  }
+
   render(){
-    console.log(this.props)
     if(!this.props.stream){
       return (
         <div>
@@ -19,7 +23,8 @@ class StreamEdit extends Component {
     }
     return (
       <div>
-        {this.props.stream.title}
+        <h3>Edit stream</h3>
+        <StreamForm />
       </div>
     )
   }
