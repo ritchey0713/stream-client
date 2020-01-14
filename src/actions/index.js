@@ -24,7 +24,7 @@ export const createStream = (formValues) => {
       payload: resp.data
     })
     
-    if(resp.status === 201){
+    if(resp.status >= 200 && resp.status < 300){
       history.push("/")
     } else {
       console.log("Need to go back to form")
@@ -56,12 +56,16 @@ export const fetchStream = (id) => {
 
 export const editStreams = (id, updates) => {
   return async (dispatch) => {
-    const resp = await streams.put(`/streams/${id}`, updates)
-
+    const resp = await streams.patch(`/streams/${id}`, updates)
     dispatch({
       type: EDIT_STREAM,
       payload: resp
     })
+    if(resp.status >= 200 && resp.status < 300){
+      history.push("/")
+    } else {
+      console.log("Need to go back to form")
+    }
    }
 }
 
