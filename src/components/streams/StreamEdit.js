@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { fetchStream } from "../../actions/index"
 
 class StreamEdit extends Component {
 
@@ -8,9 +9,17 @@ class StreamEdit extends Component {
   }
 
   render(){
+    console.log(this.props)
+    if(!this.props.stream){
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
     return (
       <div>
-        StreamEdit
+        {this.props.stream.title}
       </div>
     )
   }
@@ -22,4 +31,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(StreamEdit)
+export default connect(mapStateToProps, {
+  fetchStream
+})(StreamEdit)
