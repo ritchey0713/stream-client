@@ -24,7 +24,11 @@ class StreamEdit extends Component {
     return (
       <div>
         <h3>Edit stream</h3>
-        <StreamForm />
+        <StreamForm 
+          initialValues={this.props.stream} 
+          onSubmit={this.onSubmit}
+
+        />
       </div>
     )
   }
@@ -37,5 +41,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(mapStateToProps, {
-  fetchStream
+  fetchStream,
+  editStreams
 })(StreamEdit)
