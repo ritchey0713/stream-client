@@ -69,13 +69,18 @@ export const editStreams = (id, updates) => {
    }
 }
 
-export const deleteStreams = (id) => {
+export const deleteStream = (id) => {
   return async (dispatch) => {
-    await streams.delete(`/streams/${id}`)
+   const resp = await streams.delete(`/streams/${id}`)
 
     dispatch({
       type: DELETE_STREAM,
       payload: id
     })
+    if(resp.status >= 200 && resp.status < 300){
+      history.push("/")
+    } else {
+      console.log("Need to go back to form")
+    }
   }
 }
