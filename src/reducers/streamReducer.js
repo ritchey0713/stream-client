@@ -36,9 +36,16 @@ export default (state = {}, action) => {
       } 
       
     case DELETE_STREAM:
-      return state.filter(({ id }) => {
-        return id !== action.payload
-      })
+      // delete state[action.payload]
+      // return state
+      
+       return Object.keys(state).reduce((newObj, eleObj) => {
+          if (eleObj !== action.payload.toString()) {
+            newObj[eleObj] = state[eleObj] 
+          }
+          return newObj
+        }, {})
+        
 
     default:
       return state
